@@ -5,17 +5,19 @@
 #include <time.h>
 
 int main(){
-    pid_t hijo = fork();
+    pid_t hijo;
     srand(time(NULL)); //semilla para el tiempo 
     int tiempoRandom;
       
 
     for(int i=0; i<6; i++){
+        hijo = fork(); //Creacion de hijo
+    
         if(hijo==0){
             tiempoRandom = rand() % 11;
             sleep(tiempoRandom);
         }  else {
-        //nada. Creo zombies.
+            printf("Listado de directorio finalizado.\n");
         }
     }
     
