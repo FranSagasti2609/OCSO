@@ -2,18 +2,18 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <stdlib.h>
 
 int main(){
-    //Creacion del hijo
-    for(int i=0; i<30; i++){
-        pid_t hijo = fork();
-        if(hijo==0){
-            printf("Fecha de hoy: ");
-            sleep(2);
-            system("date");
-        }
-    }
    
+   pid_t hijo = fork();
+
+   if(hijo==0){
+        exit(EXIT_SUCCESS); //Creacion del zombie.
+   } else {
+    printf("Creando un zombie.\n");
+    sleep(120); //Durante 2 minutos el hijo va a ser zombie.
+   }
 
     return 0;
 }

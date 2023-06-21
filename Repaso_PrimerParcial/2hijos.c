@@ -16,13 +16,19 @@ int main(){
     if(hijo1==0){
         printf("Soy el primer hijo. Mi PID es: %d, el PID de mi padre es: %d \n",getpid(),getppid());
     } else{
-        //Estoy en el padre
+        //Estoy en el padre (Main)
+        waitpid(hijo1, NULL,0);
+
         hijo2 = fork();
         if(hijo2==0){
             printf("Soy el segundo hijo. Mi PID es: %d, el PID de mi padre es: %d \n",getpid(),getppid());
-        } else {waitpid(hijo2, NULL,0);}
-        waitpid(hijo1, NULL,0);
-        printf("Soy el padre. Finalizaron ambos hijos.\n");  
+        } else {
+            //Volvemos al padre. 
+            waitpid(hijo2, NULL,0); //Espero al segundo hijo
+            printf("Soy el padre. Finalizaron ambos hijos.\n");  
+        }
+
+        
     }
     
 
