@@ -11,8 +11,8 @@ void *holamundo(void *argumentos){
 int main(){
     
     pthread_t hilo1;
-    //pthread_create(&hilo1, NULL, holamundo, NULL);
-    //pthread_join(hilo1, NULL);
+    pthread_create(&hilo1, NULL, holamundo, NULL);
+    pthread_join(hilo1, NULL);
     printf("Fin\n");
 
     return 0;

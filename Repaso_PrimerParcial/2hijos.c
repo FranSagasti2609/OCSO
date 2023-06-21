@@ -9,26 +9,24 @@ Asegúrate de que ningún proceso hijo se convierta en un proceso zombie.*/
 
 int main(){
     pid_t hijo1, hijo2;
-    int est1, est2;
+
    
     //Primer hijo
-     hijo1 = fork();
+    hijo1 = fork();
     if(hijo1==0){
         printf("Soy el primer hijo. Mi PID es: %d, el PID de mi padre es: %d \n",getpid(),getppid());
-        exit(EXIT_SUCCESS);
-    }
-
-    //Segundo hijo
-       hijo2 = fork();
-    if(hijo2==0){
-            waitpid(hijo1, &est1,0); //Espero al primer hijo para no superponer
+    } else{
+        //Estoy en el padre
+        hijo2 = fork();
+        if(hijo2==0){
             printf("Soy el segundo hijo. Mi PID es: %d, el PID de mi padre es: %d \n",getpid(),getppid());
-            exit(EXIT_SUCCESS);
-        }
+        } else {waitpid(hijo2, NULL,0);}
+        waitpid(hijo1, NULL,0);
+        printf("Soy el padre. Finalizaron ambos hijos.\n");  
+    }
+    
 
-    waitpid(hijo1, &est1,0);
-    waitpid(hijo2, &est2,0);
-    printf("Soy el padre. Finalizaron ambos hijos.\n");
+
 
     
 

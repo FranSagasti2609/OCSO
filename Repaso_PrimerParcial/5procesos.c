@@ -27,19 +27,15 @@ int main(){
                     p5=fork();
                     if(p5==0){
                         printf("Soy el quinto proceso. PID: %d - PPID: %d\n",getpid(),getppid());
-
-                    }
-                }
-             }
-        }
-        exit(1); //Salgo con exito del hijo. Evitar repeticiones en print.
+                    } else waitpid(p5, NULL,0);
+                } else waitpid(p4, NULL,0);
+             } else waitpid(p3, NULL,0);
+        } else waitpid(p2,NULL,0);
+    } else{
+        waitpid(p1, NULL,0); 
+            printf("Finalizacion de programa.\n");
     }
-    waitpid(p1, NULL,0);
-    waitpid(p2, NULL,0);
-    waitpid(p3, NULL,0);
-    waitpid(p4, NULL,0);
-    waitpid(p5, NULL,0);
-    printf("Finalizacion de programa.\n");
+ 
 
     return 0;
 }

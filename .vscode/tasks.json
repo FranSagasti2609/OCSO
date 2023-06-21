@@ -5,6 +5,7 @@
 			"type": "cppbuild",
 			"label": "C/C++: gcc build active file",
 			"command": "/usr/bin/gcc",
+			//"command": "gcc -pthread -o ${fileDirname}/${fileBasenameNoExtension} ${file}",
 			"args": [
 				"-fdiagnostics-color=always",
 				"-g",
